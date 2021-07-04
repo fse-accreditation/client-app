@@ -4,23 +4,37 @@ import {AppMaterialModule} from './app-material/app-material.module'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NavBarComponent } from './view/nav-bar/nav-bar.component';
-import { MainContentComponent } from './view/main-content/main-content.component';
-import { MenuDrawerComponent } from './view/menu-drawer/menu-drawer.component';
+import { NavBarComponent } from './component/nav-bar/nav-bar.component';
+import { MainContentComponent } from './component/main-content/main-content.component';
+import { MenuDrawerComponent } from './component/menu-drawer/menu-drawer.component';
+import { LoginDialogComponent } from './component/login-dialog/login-dialog.component';
+import { ReactiveFormsModule} from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { StockSearchComponent } from './component/stock-search/stock-search.component';
+import { DashboardComponent } from './component/dashboard/dashboard.component';
+import { LogoutComponent } from './component/logout/logout.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
     MainContentComponent,
-    MenuDrawerComponent
+    MenuDrawerComponent,
+    LoginDialogComponent,
+    StockSearchComponent,
+    DashboardComponent,
+    LogoutComponent
+    
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    AppMaterialModule
-    
+    AppMaterialModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
