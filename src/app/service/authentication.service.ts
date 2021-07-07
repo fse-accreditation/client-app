@@ -1,25 +1,36 @@
 import { Injectable } from '@angular/core';
-import {AuthToken} from '../../entity/authToken';
+import {AuthToken} from '../entity/authToken';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import {  ConfigService} from './config.service'
+import { catchError, map } from 'rxjs/operators';
+import {  ConfigService} from './share/config.service'
 import { HttpClient } from '@angular/common/http';
+import {UserDetail} from '../entity/user-detail'
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
   tokenUrl:string;
-  authContext: any;
+  authContext: UserDetail;
 
   constructor(private httpClient : HttpClient ,private configService : ConfigService) {
-    this.tokenUrl='';
+    this.tokenUrl='api/v1/users/authenticate';
    }
 
-  isUserAuthenticate(email : string , password : string): Observable<AuthToken>{
+  isUserAuthenticate(userDetail:UserDetail): Observable<AuthToken>{
+    this.authContext={...userDetail};
     const url =this.configService.getServerUrl(this.tokenUrl);
     return this.httpClient.post<AuthToken>(url, this.authContext)
     .pipe(
-      catchError(this.handleError('addSmartphone', new AuthToken()))
+      map((response : any)=>{
+        
+      if(response.isError==='true'){
+        return new AuthToken(''); 
+      }
+      return new AuthToken(response?.result?.token);
+        
+        
+      }),
+      catchError(this.handleError('addSmartphone', new AuthToken('')))
     );
   }      
 
@@ -30,7 +41,7 @@ export class AuthenticationService {
       console.error(error);
       this.log(`${operation} failed: ${error.message}`);
   
-      return throwError(JSON.stringify(error));
+      return throwError(error);
     };
   }
   

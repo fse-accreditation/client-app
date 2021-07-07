@@ -13,7 +13,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { StockSearchComponent } from './component/stock-search/stock-search.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { LogoutComponent } from './component/logout/logout.component';
-
+import { BreadcrumbComponent } from './component/breadcrumb/breadcrumb.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './service/share/token.interceptor'
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { LogoutComponent } from './component/logout/logout.component';
     LoginDialogComponent,
     StockSearchComponent,
     DashboardComponent,
-    LogoutComponent
+    LogoutComponent,
+    BreadcrumbComponent
     
     
   ],
@@ -36,7 +39,13 @@ import { LogoutComponent } from './component/logout/logout.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,6 @@
 export class AuthToken{
     token:string
-    constructor(){
-        this.token='';
+    constructor(token:string){
+        this.token=token??'';
     }
 }

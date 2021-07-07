@@ -1,6 +1,7 @@
 import { Component, ViewChild,AfterViewInit } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {LoginDialogComponent} from './component/login-dialog/login-dialog.component'
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
