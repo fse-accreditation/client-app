@@ -21,3 +21,18 @@ table {
   width: 100%;
 }
 
+.center-grid{
+  display: flex;
+  justify-content: center;
+  min-height: 300px;
+}
+
+.no-data span{
+  font-weight: 800;
+}
+
+.error-text{
+  font-weight: 800;
+  color: red;
+}
+

@@ -49,7 +49,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     background:#673ab7
 }
 
-.mat-button-wrapper{
+.mat-simple-snackbar .mat-button-wrapper{
     color: white;
 }
 .simple-snack-bar{

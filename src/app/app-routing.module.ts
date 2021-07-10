@@ -4,8 +4,8 @@ import { DashboardComponent } from './component/dashboard/dashboard.component'
 import { StockSearchComponent } from './component/stock-search/stock-search.component'
 import {LogoutComponent} from './component/logout/logout.component'
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-  { path: 'dashboard', component: DashboardComponent },
+  { path: '', redirectTo: '/stock/search', pathMatch: 'full' },
+ // { path: 'dashboard', component: DashboardComponent },
   { path: 'stock/search', component: StockSearchComponent },
   { path: 'logout', component: LogoutComponent },
 ];

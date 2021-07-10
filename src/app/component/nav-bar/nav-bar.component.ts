@@ -1,6 +1,6 @@
 import { Component, OnInit, Output,EventEmitter } from '@angular/core';
 import {EventBroadcastService} from '../../service/share/event-broadcast.service';
-import {UserserviceService} from '../../service/userservice.service';
+import {UserService} from '../../service/user.service';
 import {EventType} from '../../entity/eventType';
 @Component({
   selector: 'app-nav-bar',
@@ -10,12 +10,13 @@ import {EventType} from '../../entity/eventType';
 export class NavBarComponent implements OnInit {
 @Output() onDrawerClick =new EventEmitter<any>();
 userName:string;
-isLogin:boolean=false;
+isAuthenticateUser:boolean=false;
   constructor(private eventBroadcastService:EventBroadcastService,
-    private userserviceService:UserserviceService
+    private userservice:UserService
     ) { }
 
   ngOnInit(): void {
+    this.setAuthentication();
     this.eventBroadcastService.on(EventType.LOGIN_SUCCESS).subscribe(event => this.handleEvent(event.payload));
   }
  
@@ -29,8 +30,14 @@ isLogin:boolean=false;
   }
 
   handleEvent(event: any) {
-    this.isLogin=true;
-    this.userName=this.userserviceService.name;
+    this.setAuthentication();
+    
+  }
+
+  setAuthentication(){
+    this.isAuthenticateUser=this.userservice.isAuthenticate;
+    this.userName=this.userservice.userName;
+
   }
 
 }

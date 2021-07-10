@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import {AuthToken} from '../../entity/authToken';
 import {AuthenticationService} from '../../service/authentication.service';
-import {UserserviceService} from '../../service/userservice.service';
+import {UserService} from '../../service/user.service';
 import {EventBroadcastService} from '../../service/share/event-broadcast.service';
 import {
   MatSnackBar,
@@ -29,7 +29,7 @@ export class LoginDialogComponent implements OnInit,OnDestroy {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private authService:AuthenticationService,
     private matSnackBar:MatSnackBar,
-    private userserviceService:UserserviceService,
+    private userserviceService:UserService,
     private eventBroadcastService:EventBroadcastService
     ) { }
     email = new FormControl('', [Validators.required, Validators.email]);
@@ -74,9 +74,12 @@ export class LoginDialogComponent implements OnInit,OnDestroy {
       const userDetail : UserDetail =new UserDetail(this.email.value,this.password.value);
       this.getAuthSubscription=this.authService.isUserAuthenticate(userDetail).pipe(finalize(()=>{}))
       .subscribe((data : AuthToken)=>{
-            this.userserviceService.isAuthenticate=true;    
-            this.userserviceService.token=data.token;
-            this.userserviceService.name='RabiS'
+           localStorage.setItem('userdetails',JSON.stringify(data));
+          // localStorage.setItem('isAuthentication', 'true');
+          // localStorage.setItem('isAuthentication', 'true');
+           // this.userserviceService.isAuthenticate=true;    
+            //this.userserviceService.token=data?.token;
+            //this.userserviceService.name='RabiS'
             this.eventBroadcastService.dispatch(new BroadcastEvent(EventType.LOGIN_SUCCESS, {}));
             this.dialogRef.close();
             this.closeInvalidMessage();

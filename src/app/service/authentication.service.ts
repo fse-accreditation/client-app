@@ -22,15 +22,11 @@ export class AuthenticationService {
     return this.httpClient.post<AuthToken>(url, this.authContext)
     .pipe(
       map((response : any)=>{
-        
-      if(response.isError==='true'){
-        return new AuthToken(''); 
-      }
-      return new AuthToken(response?.result?.token);
+       return new AuthToken(response?.result?.token,response?.result?.userName);
         
         
       }),
-      catchError(this.handleError('addSmartphone', new AuthToken('')))
+      catchError(this.handleError('getToken', new AuthToken('','')))
     );
   }      
 

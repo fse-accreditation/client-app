@@ -1,6 +1,7 @@
 import { Component, ViewChild,AfterViewInit } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {LoginDialogComponent} from './component/login-dialog/login-dialog.component'
+import {UserService} from './service/user.service'
 
 @Component({
   selector: 'app-root',
@@ -12,10 +13,10 @@ export class AppComponent implements AfterViewInit {
   @ViewChild('drawer') drawer : any;
   showFiller= false;
   isAuthenticate=false;
-  constructor(public dialog: MatDialog){}
+  constructor(public dialog: MatDialog,private userService: UserService ){}
   
   ngAfterViewInit(){
-    if(!this.isAuthenticate){
+    if(!this.userService.isAuthenticate){
       this.openLoginDialog();
     }
   }
@@ -28,7 +29,7 @@ export class AppComponent implements AfterViewInit {
     const dialogRef = this.dialog.open(LoginDialogComponent, {
       width: '400px',
       height:'150x',
-      //disableClose:true,
+      disableClose:true,
       data: {name: 'Tommy', animal: 'Dog'}
     });
 
@@ -37,5 +38,7 @@ export class AppComponent implements AfterViewInit {
       
     });
   }
+
+
 
 }

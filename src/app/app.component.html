@@ -1,7 +1,7 @@
 
-<app-nav-bar (onDrawerClick)="toggleDrawer($event)"></app-nav-bar>
+ <app-nav-bar (onDrawerClick)="toggleDrawer($event)"></app-nav-bar>
 <mat-drawer-container class="main-container" autosize>
-    <mat-drawer #drawer class="main-sidenav" mode="side">
+    <mat-drawer #drawer class="main-sidenav" [opened]="true" mode="side">
      <app-menu-drawer></app-menu-drawer>
     </mat-drawer>
    <div class="main-sidenav-content">

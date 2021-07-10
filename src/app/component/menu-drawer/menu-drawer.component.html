@@ -1,23 +1,11 @@
-<!-- <p>Auto-resizing sidenav</p>
-<p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
-<button (click)="showFiller = !showFiller" mat-raised-button>
-  Toggle extra text
-</button> -->
-
-  
-
-  <!--<button mat-flat-button color="primary" routerLink="/search/stock">
-    <mat-icon>Dashboard</mat-icon>
-    <span class="menu-right">Search Stock</span>
-  </button>-->
-  <mat-grid-list cols="1" rowHeight="50px">
-    <mat-grid-tile>
+  <mat-grid-list cols="1" rowHeight="50px" *ngIf="isAuthenticateUser">
+   <!-- <mat-grid-tile>
       <button mat-stroked-button color="primary" routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
         true}">
         <mat-icon >home</mat-icon>
         <span class="menu-right">Dashboard</span>
       </button>
-    </mat-grid-tile>
+    </mat-grid-tile> -->
     <mat-grid-tile>
       <button mat-stroked-button color="primary" routerLink="/stock/search" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
         true}" >
@@ -27,7 +15,7 @@
     </mat-grid-tile>
     <mat-grid-tile>
       <button mat-stroked-button color="primary" routerLink="/logout" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
-        true}" >
+        true}" (click)="signOut($event)" >
         <mat-icon>logout</mat-icon>
         <span class="menu-right">Log Out</span>
       </button>
